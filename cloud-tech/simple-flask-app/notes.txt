@@ -1,0 +1,30 @@
+General intro to Docker CLI from class 1
+
+Check for version - DO NOT INSTAL FROM BREW
+
+docker version
+
+First build the image using the dockerfile
+
+Command	What It Does
+docker --version	Shows the installed version of Docker
+docker ps	Lists running containers
+docker ps -a	Lists all containers, including stopped ones
+docker images	Lists all images downloaded to your machine
+docker pull <image>	Downloads a Docker image from Docker Hub
+docker run <image>	Runs a container from an image
+docker run -it <image>	Runs a container interactively (useful for shells)
+docker run -d <image>	Runs a container in detached mode (in background)
+docker run -p 8080:80 <image>	Maps container port 80 to local port 8080
+docker run --name my-container <image>	Names the container my-container
+docker start <container>	Starts a stopped container
+docker stop <container>	Stops a running container
+docker restart <container>	Restarts a container
+docker rm <container>	Removes a container
+docker rmi <image>	Removes a Docker image
+docker exec -it <container> bash	Opens a terminal session inside a running container
+docker logs <container>	Shows logs from a container
+docker build -t <name> .	Builds a Docker image from a Dockerfile in the current directory
+docker buildx build --platform linux/amd64 -t <name> .	Builds image for a specific platform (like amd64)
+docker push <image>	Uploads your image to Docker Hub
+docker pull <image>	Downloads an image from Docker Hub
