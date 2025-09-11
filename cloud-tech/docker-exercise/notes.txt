@@ -1,0 +1,15 @@
+https://docs.docker.com/get-started/workshop/
+
+
+%  docker network create todo-app:
+1d7f787584575008f567e21b6e9a69817fe64b462f7786ca1940867aa19adad8
+
+
+ docker-exercise % docker exec -it e587b56c8a09 mysql       
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug e587b56c8a09
+    Learn more at https://docs.docker.com/go/debug-cli/
+
+    >>>> docker exec -it e587b56c8a09 mysql -u root -p
