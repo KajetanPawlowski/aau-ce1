@@ -1,0 +1,18 @@
+This is all about deployment.yaml file
+
+this exercise was done to do the minikube
+
+    % minikube start
+
+pod.yaml    
+    - one pod one service (one container + optional service like logger)
+
+ten-pods.yaml 
+    - type Deployment - specify the number of pods
+
+deploy-with-ip-service.yaml
+    - full example of deployment file
+    - enure to open the tunnel
+        % minikube tunnel
+    
+    
