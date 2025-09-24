@@ -1,3 +1,7 @@
 .DS_Store
 node_modules/
 secrets.py
+azure_secrets.py
+iot_secrets.py
+uc8100/
+*/handout/pwn/lib

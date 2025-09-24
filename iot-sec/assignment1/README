@@ -1,0 +1,11 @@
+IoT Device 
+   |
+   v
+Azure IoT Hub  --- trigger ---> Azure Function (ingest)
+                                      |
+                                      v
+                               Cosmos DB (Telemetry)
+                                      ^
+                                      |
+HTTP requests --- Azure Function (API) ---
+(GET averages)
