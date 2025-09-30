@@ -1,0 +1,20 @@
+terraform init
+terraform plan
+terraform apply
+
+
+
+ % aws ec2 describe-instance-types \
+  --filters "Name=free-tier-eligible,Values=true" \
+  --query "InstanceTypes[*].InstanceType" \
+  --output table
+-----------------------
+|DescribeInstanceTypes|
++---------------------+
+|  t4g.small          |
+|  c7i-flex.large     |
+|  t3.micro           |
+|  t4g.micro          |
+|  t3.small           |
+|  m7i-flex.large     |
++---------------------+
