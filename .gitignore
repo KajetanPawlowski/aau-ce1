@@ -12,3 +12,35 @@ uc8100/
 crash/
 *.log
 *.tfvars
+
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Build folders
+/bin/
+/build/
+/dist/
+
+# Go module files (optional, usually keep go.mod/go.sum)
+go.sum
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
