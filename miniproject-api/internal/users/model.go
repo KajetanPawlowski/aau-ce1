@@ -1,37 +1,17 @@
 package users
 
-import "sync"
-
-// User represents a user entity.
-type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-}
-
-// In-memory "database"
-var (
-	users  = make(map[int]User)
-	nextID = 1
-	mu     sync.Mutex
+import (
+	"miniproject-api/pkg/database"
+	"gorm.io/gorm"
 )
 
-// CreateUser stores a new user and returns it.
-func CreateUser(username string) User {
-	mu.Lock()
-	defer mu.Unlock()
-	user := User{
-		ID:       nextID,
-		Username: username,
-	}
-	users[nextID] = user
-	nextID++
-	return user
+// User represents a user entity in the DB
+type User struct {
+	gorm.Model
+	Username string `json:"username" gorm:"unique;not null"`
 }
 
-// GetUser retrieves a user by ID.
-func GetUser(id int) (User, bool) {
-	mu.Lock()
-	defer mu.Unlock()
-	user, exists := users[id]
-	return user, exists
+// AutoMigrate runs GORM migrations
+func AutoMigrate() {
+	database.DB.AutoMigrate(&User{})
 }

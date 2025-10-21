@@ -1,19 +1,26 @@
 package users
 
-// Service defines the user business logic layer.
+import "miniproject-api/pkg/database"
+
 type Service struct{}
 
-// NewService creates a new user service.
 func NewService() *Service {
 	return &Service{}
 }
 
-// CreateUser wraps model.CreateUser.
+// CreateUser saves a new user in the DB
 func (s *Service) CreateUser(username string) User {
-	return CreateUser(username)
+	user := User{Username: username}
+	database.DB.Create(&user)
+	return user
 }
 
-// GetUser wraps model.GetUser.
-func (s *Service) GetUser(id int) (User, bool) {
-	return GetUser(id)
+// GetUser retrieves a user by ID
+func (s *Service) GetUser(id uint) (User, bool) {
+	var user User
+	result := database.DB.First(&user, id)
+	if result.Error != nil {
+		return User{}, false
+	}
+	return user, true
 }

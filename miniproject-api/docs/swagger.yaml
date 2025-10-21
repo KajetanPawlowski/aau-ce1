@@ -1,0 +1,190 @@
+basePath: /
+definitions:
+  posts.Post:
+    type: object
+  threads.Thread:
+    type: object
+  users.User:
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Twitter-like API with Users, Threads, Posts
+  title: MiniProject API
+  version: "1.0"
+paths:
+  /threads:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/threads.Thread'
+            type: array
+      summary: List all threads
+      tags:
+      - threads
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Thread data
+        in: body
+        name: thread
+        required: true
+        schema:
+          $ref: '#/definitions/threads.Thread'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/threads.Thread'
+      summary: Create a new thread
+      tags:
+      - threads
+  /threads/{id}:
+    get:
+      parameters:
+      - description: Thread ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/threads.Thread'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a thread by ID
+      tags:
+      - threads
+  /threads/{thread_id}/posts:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Thread ID
+        in: path
+        name: thread_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/posts.Post'
+            type: array
+      summary: List posts in a thread
+      tags:
+      - posts
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Thread ID
+        in: path
+        name: thread_id
+        required: true
+        type: integer
+      - description: Post content
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/posts.Post'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/posts.Post'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a post in a thread
+      tags:
+      - posts
+  /users:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/users.User'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new user
+      tags:
+      - users
+  /users/{id}:
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.User'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a user by ID
+      tags:
+      - users
+swagger: "2.0"

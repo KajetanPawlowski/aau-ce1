@@ -21,13 +21,21 @@ func NewHandler(service *Service) *Handler {
 func (h *Handler) RegisterRoutes(r *gin.Engine) {
 	usersGroup := r.Group("/users")
 	{
-		usersGroup.POST("", h.createUser)
-		usersGroup.GET("/:id", h.getUser)
+		usersGroup.POST("", h.CreateUser)
+		usersGroup.GET("/:id", h.GetUser)
 	}
 }
 
-// createUser handles POST /users
-func (h *Handler) createUser(c *gin.Context) {
+// CreateUser godoc
+// @Summary Create a new user
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param user body User true "User data"
+// @Success 201 {object} User
+// @Failure 400 {object} map[string]string
+// @Router /users [post]
+func (h *Handler) CreateUser(c *gin.Context) {
 	var req struct {
 		Username string `json:"username"`
 	}
@@ -40,14 +48,24 @@ func (h *Handler) createUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, user)
 }
 
-// getUser handles GET /users/:id
-func (h *Handler) getUser(c *gin.Context) {
+// GetUser godoc
+// @Summary Get a user by ID
+// @Tags users
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} User
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Router /users/{id} [get]
+func (h *Handler) GetUser(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	idInt, err := strconv.Atoi(idStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
+
+	id := uint(idInt)  // cast int -> uint
 
 	user, exists := h.service.GetUser(id)
 	if !exists {
