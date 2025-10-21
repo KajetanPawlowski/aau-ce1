@@ -1,1 +1,18 @@
 AAU Computer engineering repo for all notes 
+
+[HTTP Request]
+     │
+     ▼
+ ┌────────────┐
+ │  Handler   │   <- Only handles HTTP (Gin)
+ └────┬───────┘
+      │
+      ▼
+ ┌────────────┐
+ │  Service   │   <- Business logic (pure Go)
+ └────┬───────┘
+      │
+      ▼
+ ┌────────────┐
+ │  Model/Repo│   <- Data structures or DB
+ └────────────┘
