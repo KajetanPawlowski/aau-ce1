@@ -1,0 +1,35 @@
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hello
+  namespace: kajetan
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 300
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: hello-ctr
+          image: nginx:alpine
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:  
+            - containerPort: 80     
+          
+
